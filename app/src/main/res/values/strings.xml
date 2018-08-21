@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">1 to 1 chat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="etEnterName"><font size="16">Enter name</font></string>
+    <string name="etContactNo"><font size="16">Enter contact no.</font></string>
+    <string name="etEnterPassword"><font size="16">Enter password</font></string>
+    <string name="etEnterComment"><font size="16">Enter comment</font></string>
+    <string name="etEnterStatus"><font size="16">Enter status</font></string>
+    <string name="etEnterDetail"><font size="16">Enter detail</font></string>
+    <string name="etEnterEmail"><font size="16">Enter email</font></string>
+</resources>

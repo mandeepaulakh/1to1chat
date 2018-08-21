@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "808768190367",
+    "firebase_url": "https://to1chat-72a5b.firebaseio.com",
+    "project_id": "to1chat-72a5b",
+    "storage_bucket": "to1chat-72a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808768190367:android:53acdfb921737993",
+        "android_client_info": {
+          "package_name": "com.dupleit.chatapp.a1to1chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808768190367-1jej49vcufegroits8d0ta7cs088968r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dupleit.chatapp.a1to1chat",
+            "certificate_hash": "4eaa912ec1bf0d294e65fa227dcc82374598fa31"
+          }
+        },
+        {
+          "client_id": "808768190367-eb9gm8n3691ceb5pt1ee2nuim2bq104v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgMi1QG_VFWRrWgnZLXNAZGwIIW8l6A5c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808768190367-eb9gm8n3691ceb5pt1ee2nuim2bq104v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
