@@ -15,11 +15,16 @@ import com.dupleit.chatapp.a1to1chat.profile.profileActivity;
 import com.dupleit.chatapp.a1to1chat.startActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Toolbar mToolbar;
-
+    private DatabaseReference mUserDatabase;
+    private FirebaseUser mCurrentUser;
     private ViewPager mViewPager;
     private sectionPagerAdapter mAdpater;
     private TabLayout mTabLayout;
@@ -33,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.mainpage_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Duple Chat");
-
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = mCurrentUser.getUid();
+        mUserDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUserId);
+        mUserDatabase.keepSynced(true);
         mViewPager = findViewById(R.id.tabPager);
         mTabLayout = findViewById(R.id.mTabLayout);
         mAdpater = new sectionPagerAdapter(getSupportFragmentManager());
@@ -51,7 +59,18 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser == null){
             sendToStart();
 
+        }else {
+            mUserDatabase.child("online").setValue("true");
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+
+        mUserDatabase.child("online").setValue("false");
+
     }
 
     private void sendToStart() {

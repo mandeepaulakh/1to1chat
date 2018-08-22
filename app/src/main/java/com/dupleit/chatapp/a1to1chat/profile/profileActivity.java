@@ -76,6 +76,7 @@ public class profileActivity extends AppCompatActivity {
         String currentUserId = mCurrentUser.getUid();
         userEmail.setText(mCurrentUser.getEmail());
         mUserDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUserId);
+        mUserDatabase.keepSynced(true);
         updateProfile =findViewById(R.id.updateProfile);
 
         if (!checkInternetState.getInstance(profileActivity.this).isOnline()) {
@@ -178,7 +179,7 @@ public class profileActivity extends AppCompatActivity {
                 etStatus.setText(status);
 
                 if (!image.equals("default")||image.equals("")){
-                    Glide.with(profileActivity.this).load(image).into(UserProfileImage);
+                    Glide.with(getApplicationContext()).load(image).into(UserProfileImage);
                 }
 
             }

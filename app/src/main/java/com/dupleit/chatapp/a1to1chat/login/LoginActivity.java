@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            progressDialog.dismiss();
                             Log.d("loginActivity", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Can't sign in. please check form",
                                     Toast.LENGTH_SHORT).show();

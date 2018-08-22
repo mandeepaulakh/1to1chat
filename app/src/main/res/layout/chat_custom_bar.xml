@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:padding="4dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/custom_bar_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/ic_account_circle_black_36dp"
+        app:civ_border_color="#e3afafaf"
+        app:civ_border_width="2dp" />
+
+    <TextView
+        android:id="@+id/custom_bar_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/custom_bar_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:visibility="visible"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/custom_bar_name"
+        android:textColor="@color/colorWhite"
+        android:text="TextView" />
+</RelativeLayout>

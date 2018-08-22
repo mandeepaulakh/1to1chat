@@ -100,6 +100,8 @@ public class registerActivity extends AppCompatActivity {
                             userMap.put("contact",edittextContact);
                             userMap.put("status",edittextStatus);
                             userMap.put("image","default");
+                            userMap.put("uid",uId);
+
                             mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -118,6 +120,7 @@ public class registerActivity extends AppCompatActivity {
 
                         } else {
                             // If sign in fails, display a message to the user.
+                            progressDialog.dismiss();
                             Log.d("registerActivity", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(registerActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();

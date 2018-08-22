@@ -1,14 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FriendsFrag.friendsFragment">
+    android:id="@+id/frame"
+    android:background="@color/colorWhite">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/noDataFound"
+        android:text="No Data found"
+        android:textSize="18dp"
+        android:textColor="@color/colorAccent"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:visibility="gone"
 
+        />
+    <TextView
+        android:id="@+id/noSearchResultFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:paddingTop="15dp"
+        android:text="No search results found"
+        android:layout_marginTop="80dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
+        android:visibility="gone"
+        />
+
+    <!--<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/sorryEmoji">
+        <ImageView
+
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/sad"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/sad"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sad"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:textSize="17dp"
+            android:text="Sorry can't connect."/>
+    </RelativeLayout>-->
 </FrameLayout>
