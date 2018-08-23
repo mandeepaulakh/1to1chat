@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.dupleit.chatapp.a1to1chat.Main.adapter.sectionPagerAdapter;
 import com.dupleit.chatapp.a1to1chat.R;
@@ -19,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -39,14 +42,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Duple Chat");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUserId = mCurrentUser.getUid();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUserId);
-        mUserDatabase.keepSynced(true);
+        if (mCurrentUser== null){
+            sendToStart();
+
+        }else {
+            String currentUserId = mCurrentUser.getUid();
+            mUserDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUserId);
+            mUserDatabase.keepSynced(true);
+        }
+
         mViewPager = findViewById(R.id.tabPager);
         mTabLayout = findViewById(R.id.mTabLayout);
         mAdpater = new sectionPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdpater);
-
         mTabLayout.setupWithViewPager(mViewPager);
 
     }
@@ -68,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-
-        mUserDatabase.child("online").setValue("false");
+        long timeStamp = new Date().getTime();
+        mUserDatabase.child("online").setValue(""+timeStamp);
 
     }
 

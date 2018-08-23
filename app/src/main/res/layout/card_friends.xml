@@ -27,6 +27,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
                 android:gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -82,11 +83,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/friendName"
                     android:text="status"
-                    android:fontFamily="sans-serif-medium"
                     android:layout_marginRight="12dp"
-                    android:singleLine="true"
-                    android:textColor="#9b9b9b"
-                    android:textSize="14sp" />
+                    android:singleLine="true" />
 
 
                 <!--<ImageView android:layout_width="20dp"

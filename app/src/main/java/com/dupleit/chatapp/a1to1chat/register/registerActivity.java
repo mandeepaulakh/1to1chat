@@ -100,6 +100,7 @@ public class registerActivity extends AppCompatActivity {
                             userMap.put("contact",edittextContact);
                             userMap.put("status",edittextStatus);
                             userMap.put("image","default");
+                            userMap.put("thumb_image", "default");
                             userMap.put("uid",uId);
 
                             mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {

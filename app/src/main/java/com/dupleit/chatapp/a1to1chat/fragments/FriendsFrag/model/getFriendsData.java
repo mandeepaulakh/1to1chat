@@ -7,37 +7,67 @@ public class getFriendsData {
     private String status;
     private String online;
     private String uid;
-    private Integer lastSeen;
+    private String thumb_image;
 
-    public getFriendsData() {
-
+    public getFriendsData(String name, String image, String status, String online, String uid, String thumb_image) {
+        this.name = name;
+        this.image = image;
+        this.status = status;
+        this.online = online;
+        this.uid = uid;
+        this.thumb_image = thumb_image;
     }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImage() {
         return image;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getOnline() {
         return online;
     }
 
+    public void setOnline(String online) {
+        this.online = online;
+    }
+
     public String getUid() {
         return uid;
     }
 
-    public getFriendsData(String name, String image, String status, String online, String uid,Integer lastSeen) {
-        this.name = name;
-        this.image = image;
-        this.status = status;
-        this.online = online;
+    public void setUid(String uid) {
         this.uid = uid;
-        this.lastSeen = lastSeen;
     }
+
+    public String getThumb_image() {
+        return thumb_image;
+    }
+
+    public void setThumb_image(String thumb_image) {
+        this.thumb_image = thumb_image;
+    }
+
+    public getFriendsData() {
+
+    }
+
 }

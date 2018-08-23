@@ -104,17 +104,13 @@ public class friendsFragment extends Fragment implements allFriendsAdapter.Conta
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progressBar.setVisibility(View.GONE);
-
                 friendsList.clear();
-
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-
                     getFriendsData userdetails = dataSnapshot1.getValue(getFriendsData.class);
-                    Object obj = dataSnapshot1.getKey();//for getting key
-
-                    Log.e(TAG, "onDataChange: "+obj );
-                    friendsList.add(userdetails);
-                    adapter.notifyDataSetChanged();
+                    if (!currentUserId.equals(userdetails.getUid())){
+                        friendsList.add(userdetails);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
 
             }

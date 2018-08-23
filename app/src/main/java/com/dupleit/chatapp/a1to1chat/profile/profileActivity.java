@@ -2,6 +2,7 @@ package com.dupleit.chatapp.a1to1chat.profile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -39,10 +40,14 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
+import id.zelory.compressor.Compressor;
 
 public class profileActivity extends AppCompatActivity {
     EditText etDisplayName,etContact,etStatus;
@@ -203,21 +208,69 @@ public class profileActivity extends AppCompatActivity {
                 progressDialog.setTitle("Uploading Image");
                 progressDialog.show();
 
-                //getting the storage reference
-                final StorageReference filePath = mImageStorage.child("profile_image").child("profile_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+                Uri resultUri = result.getUri();
+
+                File thumb_filePath = new File(resultUri.getPath());
+
+                String current_user_id = mCurrentUser.getUid();
+
+
+                Bitmap thumb_bitmap = new Compressor(this)
+                        .setMaxWidth(200)
+                        .setMaxHeight(200)
+                        .setQuality(75)
+                        .compressToBitmap(thumb_filePath);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                final byte[] thumb_byte = baos.toByteArray();
+
+
+                StorageReference filepath = mImageStorage.child("profile_images").child(current_user_id + ".jpg");
+                final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumbs").child(current_user_id + ".jpg");
+
                 //adding the file to reference
-                filePath.putFile(selectedImageUri)
+                filepath.putFile(selectedImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot task) {
                             //dismissing the progress dialog
-                            progressDialog.dismiss();
+                            final String download_url = task.getDownloadUrl().toString();
+
+                            UploadTask uploadTask = thumb_filepath.putBytes(thumb_byte);
+                            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
+
+                                    String thumb_downloadUrl = thumb_task.getResult().getDownloadUrl().toString();
+
+                                    if(thumb_task.isSuccessful()){
+
+                                        Map update_hashMap = new HashMap();
+                                        update_hashMap.put("image", download_url);
+                                        update_hashMap.put("thumb_image", thumb_downloadUrl);
+
+                                        mUserDatabase.updateChildren(update_hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    progressDialog.dismiss();
+                                                   // Toast.makeText(profileActivity.this, "Success Uploading.", Toast.LENGTH_LONG).show();
+                                                    Toasty.success(profileActivity.this, "Uploading successfully.", Toast.LENGTH_SHORT, true).show();
+                                                }
+
+                                            }
+                                        });
+
+                                    } else {
+                                        Toasty.error(profileActivity.this, "Error in uploading thumbnail.", Toast.LENGTH_SHORT, true).show();
+                                        progressDialog.dismiss();
+
+                                    }
 
 
-                            String download_url = task.getStorage().getDownloadUrl().toString();
-
-                            mUserDatabase.child("image").setValue(download_url);
-                            Toasty.success(profileActivity.this, "Image updated", Toast.LENGTH_SHORT, true).show();
+                                }
+                            });
 
                         }
                     })

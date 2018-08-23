@@ -39,7 +39,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".chat.chatActivity"
-            android:parentActivityName=".Main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
